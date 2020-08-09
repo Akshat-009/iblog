@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
-from .models import Query
+from .models import Query,Post
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -22,3 +22,12 @@ def contact(request):
 
 def blog(request):
     return render(request,'blog.html')
+def search(request):
+    query = request.GET.get('query')
+    alltitle =Post.objects.filter(title__icontains=query)
+    allcontent = Post.objects.filter(content__icontains=query)
+    
+    allPosts=list(alltitle)+list(allcontent)
+    context={'allPosts':allPosts}
+    return render(request,'search.html',context)
+    
