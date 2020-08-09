@@ -9,6 +9,7 @@
 {%for post in allPosts%}
 <div class="card my-2">
   <div class="card-body">
+  <strong class="d-inline-block mb-2 text-danger">{{post.category}}</strong>
     <h5 class="card-title" style="text-transform:capitalize;">{{post.title}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{post.timestamp}}</h6>
     <p class="card-text">{{post.content |truncatechars:100}}</p>

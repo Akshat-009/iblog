@@ -4,7 +4,8 @@
 {%block body%}
 <div class="container">
 <div class="blog-post my-5">
-        <h2 class="blog-post-title">{{post.title}}</h2>
+  <strong class="d-inline-block mb-2 text-danger">{{post.category}}</strong>
+        <h2 class="blog-post-title" style="text-transform:capitalize;">{{post.title}}</h2>
         <p class="blog-post-meta">{{post.timestamp}} by <span style="color:royalblue;">{{post.author}}</span></p>
          <p>{{post.content}}</p>
            </div>
