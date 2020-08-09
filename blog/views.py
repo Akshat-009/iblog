@@ -20,8 +20,10 @@ def contact(request):
         return redirect('contact')
     return render(request,'contact.html')
 
-def blog(request):
-    return render(request,'blog.html')
+def blog(request,slug):
+    post=Post.objects.filter(slug=slug)[0]
+    context={'post':post}
+    return render(request,'blog.html',context)
 def search(request):
     query = request.GET.get('query')
     alltitle =Post.objects.filter(title__icontains=query)
