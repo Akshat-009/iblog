@@ -30,8 +30,11 @@ def search(request):
     allcontent = Post.objects.filter(content__icontains=query)
     if len(query) < 1 or len(query) >255:
         allPosts=[]
+        messages.error(request,'No search results found')
     else:
         allPosts=list(alltitle)+list(allcontent)
+    if len(allPosts)==0:
+        messages.error(request,'No blogs found')
     context={'allPosts':allPosts,'query':query}
     return render(request,'search.html',context)
     
