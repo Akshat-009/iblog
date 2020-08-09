@@ -10,9 +10,13 @@ class Query(models.Model):
         return self.name
 class PostCategory(models.Model):
     category = models.CharField(max_length=12)
+    def __str__(self):
+        return self.category
 class Post(models.Model):
     category=models.ForeignKey(PostCategory,on_delete=models.CASCADE)
     title = models.CharField(max_length=122)
     content=models.TextField()
     timestamp = models.DateTimeField(auto_now=True)
     slug=models.CharField(max_length=122)
+    def __str__(self):
+        return self.title
