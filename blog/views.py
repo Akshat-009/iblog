@@ -26,8 +26,10 @@ def search(request):
     query = request.GET.get('query')
     alltitle =Post.objects.filter(title__icontains=query)
     allcontent = Post.objects.filter(content__icontains=query)
-    
-    allPosts=list(alltitle)+list(allcontent)
-    context={'allPosts':allPosts}
+    if len(query) < 1 or len(query) >255:
+        allPosts=[]
+    else:
+        allPosts=list(alltitle)+list(allcontent)
+    context={'allPosts':allPosts,'query':query}
     return render(request,'search.html',context)
     

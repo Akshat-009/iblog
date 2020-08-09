@@ -3,7 +3,9 @@
 {%block title%}Search Results{%endblock title%}
 {%block body%}
 <div class="container">
-<h1>Search Results:</h1>
+
+{%if allPosts%}
+<h1>Search Results:{{query}}</h1>
 {%for post in allPosts%}
 <div class="card my-2">
   <div class="card-body">
@@ -14,5 +16,16 @@
   </div>
 </div>
 {%endfor%}
+{%else%}
+<h2 class="my-2">Your search -<strong>{{query}}</strong>-did not match any documents.</h2>
+<h3>
+Suggestions:
+</h3>
+<ul>
+<li>Make sure that all words are spelled correctly.</li>
+<li>Try different keywords.</li>
+<li>Try more general keywords.</li>
+</ul>
+{%endif%}
 </div>
 {%endblock body%}
