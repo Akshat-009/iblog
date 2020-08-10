@@ -3,6 +3,8 @@ from django.contrib import messages
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from .models import Query,Post
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -19,7 +21,6 @@ def contact(request):
         messages.success(request, 'Profile details updated.')
         return redirect('contact')
     return render(request,'contact.html')
-
 def blog(request,slug):
     post=Post.objects.filter(slug=slug)[0]
     context={'post':post}
@@ -37,4 +38,36 @@ def search(request):
         messages.error(request,'No blogs found')
     context={'allPosts':allPosts,'query':query}
     return render(request,'search.html',context)
-    
+def signup(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        firstname=request.POST.get('firstname')
+        lastname=request.POST.get('lastname')
+        print(password)
+        user=User.objects.create_user(username=username,email=email,password=password)
+        user.first_name=firstname
+        user.last_name=lastname
+        messages.success(request,"Succesfully signed up")
+        return render(request,'index.html',{'type':'success'})
+    else:
+        return HttpResponse("error 404 not found")
+def loginuser(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user=authenticate(request,username=username, password=password)
+        if user is  not None:
+            login(request,user)
+            messages.success(request,'Logged in successfully')
+            return render(request,'index.html',{'type':'success'})
+        else:
+            messages.error(request,'Invalid Credentials')
+            return render(request,'index.html',{'type':'danger'})
+    else:
+        return HttpResponse('404 not found')
+def logoutuser(request):
+    logout(request)
+    messages.info(request,'Logged out successfully')
+    return render(request,'index.html',{'type':'success'})

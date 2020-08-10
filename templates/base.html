@@ -35,6 +35,19 @@
             <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
         </form>
+        {%if user.is_authenticated %}
+        <ul class="navbar-nav mr-0">
+              <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/logout">Logout</a>
+
+        </div>
+      </li>
+      </ul>
+        {%else %}
         <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger mx-2" data-toggle="modal" data-target="#signupModal">
     SignUp
@@ -42,6 +55,7 @@
   <button type="button" class="btn btn-success " data-toggle="modal" data-target="#LoginModal">
     Login
   </button>
+  {%endif%}
     </div>
 </nav>
 
@@ -57,26 +71,37 @@
           </button>
         </div>
         <div class="modal-body">
-            <form method="post" action="/">
+            <form method="post" action="/signup">
+              {% csrf_token %}
                 <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" required placeholder="Enter unique username">
+                    <input type="text" name="username" class="form-control" required placeholder="Enter unique username">
+                    
+                  </div>
+                                  <div class="form-group">
+                    <label for="exampleInputEmail1">First name</label>
+                    <input type="text" name="firstname" class="form-control" required placeholder="Enter unique username">
+                    
+                  </div>
+                                  <div class="form-group">
+                    <label for="exampleInputEmail1">Last Name</label>
+                    <input type="text" name="lastname" class="form-control" required placeholder="Enter unique username">
                     
                   </div>
                 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required placeholder="Enter your valid email address">
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required placeholder="Enter your valid email address">
                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">SignUp</button>
+                    <button type="submit" class="btn btn-primary">SignUp</button>
                   </div>
               </form>
         </div>
@@ -95,22 +120,23 @@
               </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/">
+                <form method="post" action="/login">
+                  {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" required placeholder="Enter unique username">
+                        <input type="text" name="username" class="form-control" required placeholder="Enter unique username">
                         
                       </div>
                     
 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                     </div>
     
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                       </div>
                   </form>
             </div>
