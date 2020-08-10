@@ -7,7 +7,7 @@
   <strong class="d-inline-block mb-2 text-danger">{{post.category}}</strong>
         <h2 class="blog-post-title" style="text-transform:capitalize;">{{post.title}}</h2>
         <p class="blog-post-meta">{{post.timestamp}} by <span style="color:royalblue;">{{post.author}}</span></p>
-         <p>{{post.content}}</p>
+         <p>{{post.content|safe}}</p>
            </div>
     
     {%if comments%}
