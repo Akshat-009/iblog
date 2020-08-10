@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
-from .models import Query,Post,BlogComment
+from .models import Query,Post,BlogComment,PostCategory
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 
@@ -12,7 +12,22 @@ def index(request):
     
     return render(request,'index.html',{'posts':poppost})
 def about(request):
-    return render(request,'about.html')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        author = request.user
+        category=request.POST.get('category')
+        category_assign=PostCategory(category=category)
+        category_assign.save()
+        post=Post(author=author,title=title,content=content,category=category_assign)
+        post.save()
+        messages.success(request, 'Post saved')
+        return render(request,'about.html')
+        
+    else:
+        category=PostCategory.objects.all().values('category').distinct()
+      
+        return render(request,'about.html',{'category':category})
 def contact(request):
     
     if request.method == 'POST':

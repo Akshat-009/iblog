@@ -22,7 +22,7 @@
   <strong class="d-inline-block mb-2 text-danger">{{post.category}}</strong>
     <h5 class="card-title" style="text-transform:capitalize;">{{post.title}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{post.timestamp}}</h6>
-    <p class="card-text">{{post.content |truncatechars:100}}</p>
+    <p class="card-text">{{post.content |truncatechars:100|safe}}</p>
     <a href="blog/{{post.slug}}" class="card-link">Read more</a>
   </div>
 </div>
