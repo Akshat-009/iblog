@@ -1,5 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Query(models.Model):
@@ -26,3 +28,12 @@ class Post(models.Model):
         super(Post, self).save()
     def __str__(self):
         return self.title
+class BlogComment(models.Model):
+    id=models.AutoField(primary_key=True)
+    author=models.ForeignKey(User,on_delete=models.CASCADE)
+    post=models.ForeignKey(Post,on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+    comment=models.TextField()
+    parent=models.ForeignKey('self',blank=True,null=True,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.comment[0:12]

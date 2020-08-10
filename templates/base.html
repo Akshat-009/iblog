@@ -11,6 +11,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>{%block title %} {%endblock title%}</title>
+
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">iBlog</a>
@@ -36,14 +37,18 @@
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
         </form>
         {%if user.is_authenticated %}
-        <ul class="navbar-nav mr-0">
+        <div>
+        <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown">
+            
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{user.username}}
         </a>
+        
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="/logout">Logout</a>
-
+        </div>
+        
         </div>
       </li>
       </ul>

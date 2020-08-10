@@ -9,5 +9,19 @@
         <p class="blog-post-meta">{{post.timestamp}} by <span style="color:royalblue;">{{post.author}}</span></p>
          <p>{{post.content}}</p>
            </div>
+    
+    {%if comments%}
+   <h2>Comments:</h2>
+    {%for comment in comments%}
+  <div class="card w-75 my-2">
+  <div class="card-body">
+    <h5 class="card-title" style="text-transform:capitalize;">{{comment.author}}</h5>
+    <p class="blog-post-meta" style="color:royalblue">{{comment.timestamp}}</p>
+    <p class="card-text">{{comment.comment}}</p>
+  </div>
+</div>
+  {%endfor%}
+  
+    {%endif%}       
     </div>
 {%endblock body%}
