@@ -10,5 +10,6 @@ urlpatterns = [
     path('search',views.search,name="search"),
     path('signup',views.signup,name="signup"),
     path('login',views.loginuser,name="login"),
-    path('logout',views.logoutuser,name="logout")
+    path('logout',views.logoutuser,name="logout"),
+    path('postcomments/<str:slug>',views.postcomment,name="postcomments"),
 ]

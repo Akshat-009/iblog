@@ -21,7 +21,30 @@
   </div>
 </div>
   {%endfor%}
-  
-    {%endif%}       
+  {%else%}
+  <div class="container my-3">
+<div class="jumbotron p-4 p-md-5 text-black rounded bg-light">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic"><strong>Be the first one to comment 📣</strong></h1>
+    </div>
+  </div> 
+    {%endif%}  
+  {% if user.is_authenticated%}
+    <form method="post" action="/postcomments/{{post.slug}}">    
+    {% csrf_token %}
+      <div class="form-group">
+    <label for="exampleFormControlTextarea1">Add your comment</label>
+    <textarea class="form-control" name="comment" autocomplete="off" id="exampleFormControlTextarea1" rows="1"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Post comment</button>
+</form>
+{%else %}
+   <div class="container my-3">
+<div class="jumbotron p-4 p-md-5 text-black rounded bg-light">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic"><strong>Login to iBlog to Comment✏✏</strong></h1>
+    </div>
+  </div> 
+{%endif %}
     </div>
 {%endblock body%}

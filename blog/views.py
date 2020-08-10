@@ -70,6 +70,16 @@ def loginuser(request):
     else:
         return HttpResponse('404 not found')
 def logoutuser(request):
+
     logout(request)
     messages.info(request,'Logged out successfully')
     return render(request,'index.html',{'type':'success'})
+def postcomment(request,slug):
+    if request.method == 'POST':
+        author = request.user
+        comment = request.POST.get('comment')
+        post=Post.objects.filter(slug=slug)[0]
+        print(author)
+        comments=BlogComment(author=author,post=post,comment=comment)
+        comments.save()
+        return redirect('/blog/' +slug)
