@@ -24,6 +24,7 @@ class Post(models.Model):
     content=models.TextField()
     timestamp = models.DateTimeField(auto_now=True)
     slug=models.SlugField(null=True,blank=True)
+    views=models.IntegerField(default=0)
     def save(self):
         self.slug=slugify(self.title)
         super(Post, self).save()

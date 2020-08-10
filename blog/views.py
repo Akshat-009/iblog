@@ -8,7 +8,9 @@ from django.contrib.auth import authenticate,login,logout
 
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    poppost=Post.objects.all().order_by('-views')[0:2]
+    
+    return render(request,'index.html',{'posts':poppost})
 def about(request):
     return render(request,'about.html')
 def contact(request):
@@ -24,6 +26,8 @@ def contact(request):
     return render(request,'contact.html')
 def blog(request,slug):
     post=Post.objects.filter(slug=slug)[0]
+    post.views=post.views+1
+    post.save()
     comments=BlogComment.objects.filter(post=post)
     context={'post':post,'comments':comments}
     return render(request,'blog.html',context)
