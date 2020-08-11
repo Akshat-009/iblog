@@ -43,8 +43,10 @@ def blog(request,slug):
     post=Post.objects.filter(slug=slug)[0]
     post.views=post.views+1
     post.save()
-    comments=BlogComment.objects.filter(post=post)
-    context={'post':post,'comments':comments}
+    comments=BlogComment.objects.filter(post=post,parent=0)
+    replies=BlogComment.objects.filter(post=post).exclude(parent=0)
+
+    context={'post':post,'comments':comments,'replies':replies}
     return render(request,'blog.html',context)
 def search(request):
     query = request.GET.get('query')
@@ -101,4 +103,13 @@ def postcomment(request,slug):
         print(author)
         comments=BlogComment(author=author,post=post,comment=comment)
         comments.save()
+        return redirect('/blog/' +slug)
+def postreply(request,slug,id):
+    if request.method == 'POST':
+        reply=request.POST.get('reply')
+        author=request.user
+        comment=BlogComment.objects.filter(id=id)[0]
+        post=Post.objects.filter(slug=slug)[0]
+        reply=BlogComment(comment=reply,parent=id,post=post,author=author)
+        reply.save()
         return redirect('/blog/' +slug)

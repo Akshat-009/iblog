@@ -36,6 +36,6 @@ class BlogComment(models.Model):
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now=True)
     comment=models.TextField()
-    parent=models.ForeignKey('self',blank=True,null=True,on_delete=models.CASCADE)
+    parent=models.IntegerField(default=0,primary_key=False)
     def __str__(self):
         return self.comment[0:12]

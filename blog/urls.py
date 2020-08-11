@@ -12,4 +12,5 @@ urlpatterns = [
     path('login',views.loginuser,name="login"),
     path('logout',views.logoutuser,name="logout"),
     path('postcomments/<str:slug>',views.postcomment,name="postcomments"),
+    path('postreply/<str:slug>/<str:id>',views.postreply,name="postreply"),
 ]

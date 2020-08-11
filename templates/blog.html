@@ -18,7 +18,39 @@
     <h5 class="card-title" style="text-transform:capitalize;">{{comment.author}}</h5>
     <p class="blog-post-meta" style="color:royalblue">{{comment.timestamp}}</p>
     <p class="card-text">{{comment.comment}}</p>
+    {%if replies%}
+    <h6>Replies:</h6>
+    <ul>
+    {% for reply in replies%}
+
+    {%ifequal reply.parent comment.id%}
+    <li>
+
+   <strong style="color:royalblue;text-transform:capitalize;">  {{reply.author}}:</strong>
+     {{reply.comment}}
+     </li>
+   {%endifequal%}
+    {%endfor%}
+    </ul>
+    {%endif%}
   </div>
+ <p>
+  {% if user.is_authenticated%}
+  <button class="btn btn-primary mx-2" type="button" data-toggle="collapse" data-target="#toggle{{comment.id}}" aria-expanded="false" aria-controls="collapseExample">
+    Reply
+  </button>
+</p>
+<div class="collapse" id="toggle{{comment.id}}">
+    <form class="mx-2 my-2" method="post" action='/postreply/{{post.slug}}/{{comment.id}}'>    
+    {% csrf_token %}
+      <div class="form-group">
+    <label for="exampleFormControlTextarea1">Reply to comment</label>
+    <textarea class="form-control" name="reply" autocomplete="off" id="exampleFormControlTextarea1" rows="1"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Post reply</button>
+</form>
+</div>
+ {%endif%}
 </div>
   {%endfor%}
   {%else%}
