@@ -37,5 +37,7 @@ class BlogComment(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
     comment=models.TextField()
     parent=models.IntegerField(default=0,primary_key=False)
+    like=models.BooleanField(default=False)
+    cntlike=models.IntegerField(default=0,primary_key=False)
     def __str__(self):
         return self.comment[0:12]
