@@ -1,12 +1,32 @@
 {% extends 'base.html'%}
 {%block title%}{{user.username}}{%endblock title%}
+
 {%block body%}
 <div class="jumbotron container my-2" style="background-color: #2c3e50; color:white;">
   <h1 class="display-4">{{user.first_name}} {{user.last_name}}</h1>
+  <div class="img_div">
+  <img src="https://source.unsplash.com/200x200/?hacker" alt="..." class="img-thumbnail mx-2 float-right">
+  </div>
   <p class="lead">Bio.</p>
-  <hr class="my-4" style="background-color:white;">
-  
-  <p></p>
+  <hr class="my-4" style="background-color:white; width:40vw;">
+
+  <ul class="list-group" >
+    <li class="list-group-item" style="background-color:#2c3e50";>FirstName: {{user.first_name}}</li>
+
+  <li class="list-group-item" style="background-color:#2c3e50">LastName: {{user.last_name}}</li>
+  <li class="list-group-item" style="background-color:#2c3e50";>Username: {{user.username}}</li>
+
+  <li class="list-group-item" style="background-color:#2c3e50">Email: {{user.email}}</li>
+
+</ul>
   
 </div>
+<style>
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    background-color: #fff;
+    border: 1px solid white;
+}</style>
 {%endblock body%}
