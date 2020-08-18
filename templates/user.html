@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+{%block title%}{{user.username}}{%endblock title%}
+{%block body%}
+<div class="jumbotron container my-2" style="background-color: #2c3e50; color:white;">
+  <h1 class="display-4">{{user.first_name}} {{user.last_name}}</h1>
+  <p class="lead">Bio.</p>
+  <hr class="my-4" style="background-color:white;">
+  
+  <p></p>
+  
+</div>
+{%endblock body%}

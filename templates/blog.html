@@ -6,7 +6,7 @@
 <div class="blog-post my-5">
   <strong class="d-inline-block mb-2 text-danger">{{post.category}}</strong>
         <h2 class="blog-post-title" style="text-transform:capitalize;">{{post.title}}</h2>
-        <p class="blog-post-meta">{{post.timestamp}} by <span style="color:royalblue;"><strong style="font-weight:bold; color:#c0392b;">{{post.author}}</strong> Views {{post.views}}</span></p>
+        <p class="blog-post-meta">{{post.timestamp}} by <span style="color:royalblue;"><strong style="font-weight:bold; color:#c0392b;"><a style="color:#c0392b;"href="/user/{{post.author}}">{{post.author}}</a></strong> Views {{post.views}}</span></p>
          <p>{{post.content|safe}}</p>
            </div>
     

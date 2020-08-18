@@ -113,3 +113,8 @@ def postreply(request,slug,id):
         reply=BlogComment(comment=reply,parent=id,post=post,author=author)
         reply.save()
         return redirect('/blog/' +slug)
+def user(request,name):
+    
+    user=User.objects.get(username=name)
+    
+    return render(request,'user.html',{'user':user})
