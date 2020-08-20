@@ -32,7 +32,7 @@
           <strong class="d-inline-block mb-2 text-primary">World</strong>
           <h3 class="mb-0">{{post.title}}</h3>
           <div class="mb-1 text-muted">{{post.timestamp}}</div>
-          <p class="card-text mb-auto">{{post.content|truncatechars:18}}</p>.</p>
+          <p class="card-text mb-auto">{{post.content|truncatechars:18|safe}}</p>.</p>
           <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block mx-2 my-3">
