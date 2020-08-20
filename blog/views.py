@@ -84,17 +84,21 @@ def loginuser(request):
         if user is  not None:
             login(request,user)
             messages.success(request,'Logged in successfully')
-            return render(request,'index.html',{'type':'success'})
+            return render(request,'index.html',{'posts':poppost,'type':'success'})
+            # return redirect('')
         else:
             messages.error(request,'Invalid Credentials')
-            return render(request,'index.html',{'type':'danger'})
+            return render(request,'index.html',{'posts':poppost,'type':'danger'})
     else:
         return HttpResponse('404 not found')
 def logoutuser(request):
 
     logout(request)
     messages.info(request,'Logged out successfully')
-    return render(request,'index.html',{'type':'success'})
+    poppost=Post.objects.all().order_by('-views')[0:2]
+    
+    return render(request,'index.html',{'posts':poppost,'type':'success'})
+
 def postcomment(request,slug):
     if request.method == 'POST':
         author = request.user
